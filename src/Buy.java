@@ -28,11 +28,11 @@ class Buy {
 
     @Test
     double total() {
-        // return subTotal()
-        // + calculateTaxMunicipal()
-        // + calculateTaxICMS()
-        // + calculateFreight()
-        // - calculateTotalDiscount();
+        return subTotal()
+                + calculateTaxMunicipal()
+                + calculateTaxICMS()
+                + calculateFreight()
+                - calculateTotalDiscount();
     }
 
     @Test
@@ -44,6 +44,7 @@ class Buy {
         // }
 
         // return total;
+        return 0.0;
     }
 
     @Test
@@ -57,7 +58,7 @@ class Buy {
         // } else if (user.userType == "standard") {
         // return 3.0;
         // }
-        // return 0.0;
+        return 0.0;
     }
 
     @Test
@@ -69,7 +70,7 @@ class Buy {
         // } else if (user.userType == "standard") {
         // return 3.0;
         // }
-        // return 0.0;
+        return 0.0;
     }
 
     @Test
@@ -83,7 +84,7 @@ class Buy {
         // } else if (user.userType == "standard") {
         // return 3.0;
         // }
-        // return 0.0;
+        return 0.0;
     }
 
     @Test
@@ -104,7 +105,7 @@ class Buy {
         // } else if (user.userType == "standard") {
         // return 3.0;
         // }
-        // return 0.0;
+        return 0.0;
     }
 
 }

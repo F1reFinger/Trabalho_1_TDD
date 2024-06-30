@@ -20,7 +20,7 @@ class Store {
 
     @Test
     ArrayList<Buy> getUserBuys(String userId) {
-        // ArrayList<Buy> userBuys = new ArrayList<>();
+        ArrayList<Buy> userBuys = new ArrayList<>();
 
         // for (Buy buy : buys) {
         // if (buy.user.id.equals(userId)) {
@@ -28,7 +28,7 @@ class Store {
         // }
         // }
 
-        // return userBuys;
+        return userBuys;
     }
 
     @Test
@@ -45,5 +45,6 @@ class Store {
         // }
 
         // return lastMonthSpent > 100;
+        return true;
     }
 }

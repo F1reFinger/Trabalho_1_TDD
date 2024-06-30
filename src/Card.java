@@ -7,5 +7,6 @@ class Card {
 
     boolean isFromStoreCard() {
         // return number.startsWith("4296 13");
+        return true;
     }
 }

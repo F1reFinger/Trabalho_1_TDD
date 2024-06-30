@@ -14,11 +14,11 @@ class Address {
 
     @Test
     String getRegion() {
-        // TODO:...
+        return "";
     }
 
     @Test
     public boolean isCapital() {
-        // TODO:...
+        return true;
     }
 }
