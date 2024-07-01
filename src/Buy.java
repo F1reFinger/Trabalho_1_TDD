@@ -28,11 +28,12 @@ class Buy {
 
     @Test
     double total() {
-        return subTotal()
-                + calculateTaxMunicipal()
-                + calculateTaxICMS()
-                + calculateFreight()
-                - calculateTotalDiscount();
+        // return subTotal()
+        // + calculateTaxMunicipal()
+        // + calculateTaxICMS()
+        // + calculateFreight()
+        // - calculateTotalDiscount();
+        return 0.0;
     }
 
     @Test
