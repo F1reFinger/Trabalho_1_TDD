@@ -42,6 +42,9 @@ class Store {
         // if (dateTimeNow.getMonthValue() - 1 == buy.date.getMinute()) {
         // lastMonthSpent += buy.subTotal();
         // }
+        // if (lastMonthSpent >= 100) {
+        // return true;
+        // }
         // }
 
         // return lastMonthSpent > 100;
