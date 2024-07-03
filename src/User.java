@@ -3,8 +3,6 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
 class User {
     String id;
     String name;
@@ -24,7 +22,6 @@ class User {
         this.cashbackBalance = 0.0;
     };
 
-    @Test
     boolean setCashbackBalance(Buy buy) {
         if (userType == "prime") {
             if (buy.card != null && buy.card.isFromStoreCard()) {
@@ -40,7 +37,6 @@ class User {
         return false;
     }
 
-    @Test
     double getCashbackBalance() {
         if (userType == "prime") {
             return cashbackBalance;
