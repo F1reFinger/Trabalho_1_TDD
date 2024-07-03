@@ -1,60 +1,42 @@
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestAddress {
+    Address address;
+    Object expectedRegion;
+    Object expectedIsRegion;
 
-    Address addressDF;
-    Address addressGO;
-    Address addressCE;
-    Address addressAL;
-    Address addressRS;
-    Address addressNotDefined;
+    public TestAddress(Address address, Object expectedRegion, Object expectedIsRegion) {
+        this.address = address;
+        this.expectedRegion = expectedRegion;
+        this.expectedIsRegion = expectedIsRegion;
+    }
 
-    @Before
-    public void setup() {
-        addressDF = new Address("Brasília", "DF");
-        addressGO = new Address("Anápolis", "GO");
-        addressCE = new Address("Fortaleza", "CE");
-        addressAL = new Address("Arapiraca", "AL");
-        addressRS = new Address("Curitiba", "RS");
-        addressNotDefined = new Address("ASDFA", "SADFASDF");
+    @Parameters
+    public static Collection<Object[]> getParameters() {
+        Object[][] resposta = new Object[][] {
+                { new Address("Brasília", "DF"), "Centro-Oeste", true },
+                { new Address("Anápolis", "GO"), "Centro-Oeste", false },
+                { new Address("Fortaleza", "CE"), "Nordeste", true },
+                { new Address("Arapiraca", "AL"), "Nordeste", false },
+                { new Address("Curitiba", "RS"), "Sul", false },
+                { new Address("ASDFA", "SADFASDF"), "Estado não identificado", false },
+        };
+        return Arrays.asList(resposta);
     }
 
     @Test
-    public void testDF() {
-        assertEquals(true, addressDF.isCapital());
-        assertEquals("Centro-Oeste", addressDF.getRegion());
+    public void test() {
+        assertEquals(expectedIsRegion, address.isCapital());
+        assertEquals(expectedRegion, address.getRegion());
     }
 
-    @Test
-    public void testGO() {
-        assertEquals(false, addressGO.isCapital());
-        assertEquals("Centro-Oeste", addressGO.getRegion());
-    }
-
-    @Test
-    public void testCE() {
-        assertEquals(true, addressCE.isCapital());
-        assertEquals("Nordeste", addressCE.getRegion());
-    }
-
-    @Test
-    public void testAL() {
-        assertEquals(false, addressAL.isCapital());
-        assertEquals("Nordeste", addressAL.getRegion());
-    }
-
-    @Test
-    public void testRS() {
-        assertEquals(false, addressRS.isCapital());
-        assertEquals("Sul", addressRS.getRegion());
-    }
-
-    @Test
-    public void testNotDefined() {
-        assertEquals(addressNotDefined.isCapital(), false);
-        assertEquals(addressNotDefined.getRegion(), "Estado não identificado");
-    }
 }
