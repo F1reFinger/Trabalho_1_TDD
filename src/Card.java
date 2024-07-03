@@ -9,7 +9,6 @@ class Card {
 
     @Test
     boolean isFromStoreCard() {
-        // return number.startsWith("4296 13");
-        return true;
+        return number.startsWith("4296 13");
     }
 }

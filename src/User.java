@@ -27,11 +27,11 @@ class User {
     @Test
     boolean setCashbackBalance(Buy buy) {
         if (userType == "prime") {
-            if (buy.card.isFromStoreCard()) {
-                double newCashback = buy.total() * 0.05;
+            if (buy.card != null && buy.card.isFromStoreCard()) {
+                double newCashback = buy.subTotal() * 0.05;
                 this.cashbackBalance = newCashback;
             } else {
-                double newCashback = buy.total() * 0.03;
+                double newCashback = buy.subTotal() * 0.03;
                 this.cashbackBalance = newCashback;
             }
             return true;
