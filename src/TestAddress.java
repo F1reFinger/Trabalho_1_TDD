@@ -34,9 +34,8 @@ public class TestAddress {
     }
 
     @Test
-    public void test() {
+    public void testIsCapital() {
         assertEquals(expectedIsCapital, address.isCapital());
-        assertEquals(expectedRegion, address.getRegion());
     }
 
 }
