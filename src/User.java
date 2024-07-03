@@ -3,8 +3,6 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
 class User {
     String id;
     String name;
@@ -24,14 +22,13 @@ class User {
         this.cashbackBalance = 0.0;
     };
 
-    @Test
     boolean setCashbackBalance(Buy buy) {
         if (userType == "prime") {
-            if (buy.card.isFromStoreCard()) {
-                double newCashback = buy.total() * 0.05;
+            if (buy.card != null && buy.card.isFromStoreCard()) {
+                double newCashback = buy.subTotal() * 0.05;
                 this.cashbackBalance = newCashback;
             } else {
-                double newCashback = buy.total() * 0.03;
+                double newCashback = buy.subTotal() * 0.03;
                 this.cashbackBalance = newCashback;
             }
             return true;
@@ -40,12 +37,11 @@ class User {
         return false;
     }
 
-    @Test
     double getCashbackBalance() {
         if (userType == "prime") {
             return cashbackBalance;
         }
 
-        return -1;
+        return -1.0;
     }
 }

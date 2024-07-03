@@ -1,8 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
 class Address {
     String state;
     String city;
@@ -12,7 +10,6 @@ class Address {
         this.state = state;
     }
 
-    @Test
     String getRegion() {
         return switch (state) {
             case "GO", "MT", "MS", "DF" -> "Centro-Oeste";
@@ -24,7 +21,6 @@ class Address {
         };
     }
 
-    @Test
     public boolean isCapital() {
         Map<String, String> capitals = new HashMap<>();
         capitals.put("GO", "Goiânia");

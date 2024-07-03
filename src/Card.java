@@ -1,4 +1,3 @@
-import org.junit.Test;
 
 class Card {
     String number;
@@ -7,9 +6,7 @@ class Card {
         this.number = number;
     }
 
-    @Test
     boolean isFromStoreCard() {
-        // return number.startsWith("4296 13");
-        return true;
+        return number.startsWith("4296 13");
     }
 }
