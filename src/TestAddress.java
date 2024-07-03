@@ -12,12 +12,12 @@ import org.junit.runners.Parameterized.Parameters;
 public class TestAddress {
     Address address;
     Object expectedRegion;
-    Object expectedIsRegion;
+    Object expectedIsCapital;
 
-    public TestAddress(Address address, Object expectedRegion, Object expectedIsRegion) {
+    public TestAddress(Address address, Object expectedRegion, Object expectedIsCapital) {
         this.address = address;
         this.expectedRegion = expectedRegion;
-        this.expectedIsRegion = expectedIsRegion;
+        this.expectedIsCapital = expectedIsCapital;
     }
 
     @Parameters
@@ -35,7 +35,7 @@ public class TestAddress {
 
     @Test
     public void test() {
-        assertEquals(expectedIsRegion, address.isCapital());
+        assertEquals(expectedIsCapital, address.isCapital());
         assertEquals(expectedRegion, address.getRegion());
     }
 
