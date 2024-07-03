@@ -23,22 +23,23 @@ class User {
         this.cashbackBalance = 0.0;
     };
 
+    
     boolean setCashbackBalance(double newCashback, Buy buy) {
-        // if (userType == "prime") {
-        // // Cashback DE R$ 0.03 A CADA REAL gasto na loja (total * 0.03)
-        // // Comprando no cartão da loja cashback de R$ 0.05 (total * 0.05)
-        // this.cashbackBalance = newCashback;
-        // return true;
-        // }
+        if (userType == "prime") {
+        // Cashback DE R$ 0.03 A CADA REAL gasto na loja (total * 0.03)
+        // Comprando no cartão da loja cashback de R$ 0.05 (total * 0.05)
+        this.cashbackBalance = newCashback;
+        return true;
+        }
 
         return false;
     }
 
     @Test
     double getCashbackBalance() {
-        // if (userType == "prime") {
-        // return cashbackBalance;
-        // }
+        if (userType == "prime") {
+        return cashbackBalance;
+        }
 
         return -1;
     }
