@@ -46,6 +46,6 @@ class User {
             return cashbackBalance;
         }
 
-        return -1;
+        return -1.0;
     }
 }
