@@ -1,5 +1,7 @@
 import java.time.LocalTime;
 
+import org.junit.Test;
+
 class Product {
     String id;
     String description;
@@ -12,4 +14,14 @@ class Product {
         this.unitType = unitType;
         this.price = price;
     };
+
+    @Test
+    double getICMSTax(Address adress) {
+        return 0.0;
+    }
+
+    @Test
+    double getMunicipalTax(Address adress) {
+        return 0.0;
+    }
 }

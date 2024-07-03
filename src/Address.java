@@ -11,36 +11,21 @@ class Address {
         this.city = city;
         this.state = state;
     }
+
     @Test
     String getRegion() {
-        if (isInRegion(state, "GO", "MT", "MS", "DF")) {
-            return "Centro-Oeste";
-        } else if (isInRegion(state, "AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE")) {
-            return "Nordeste";
-        } else if (isInRegion(state, "AC", "AP", "AM", "PA", "RO", "RR", "TO")) {
-            return "Norte";
-        } else if (isInRegion(state, "ES", "MG", "RJ", "SP")) {
-            return "Sudeste";
-        } else if (isInRegion(state, "PR", "RS", "SC")) {
-            return "Sul";
-        } else {
-            return "Estado não identificado";
-        }
+        return switch (state) {
+            case "GO", "MT", "MS", "DF" -> "Centro-Oeste";
+            case "AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE" -> "Nordeste";
+            case "AC", "AP", "AM", "PA", "RO", "RR", "TO" -> "Norte";
+            case "ES", "MG", "RJ", "SP" -> "Sudeste";
+            case "PR", "RS", "SC" -> "Sul";
+            default -> "Estado não identificado";
+        };
     }
-
-    private boolean isInRegion(String state, String... states) {
-        for (String s : states) {
-            if (s.equals(state)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     @Test
     public boolean isCapital() {
-        
         Map<String, String> capitals = new HashMap<>();
         capitals.put("GO", "Goiânia");
         capitals.put("MT", "Cuiabá");
@@ -69,7 +54,7 @@ class Address {
         capitals.put("PR", "Curitiba");
         capitals.put("RS", "Porto Alegre");
         capitals.put("SC", "Florianópolis");
-        
+
         String capital = capitals.get(state);
         return capital != null && city.equals(capital);
     }

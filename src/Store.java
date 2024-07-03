@@ -32,19 +32,23 @@ class Store {
     }
 
     @Test
-    boolean userIsSpecial(String userId) {
-        ArrayList<Buy> userBuys = getUserBuys(userId);
+    boolean userIsSpecial(User user) {
+        if (user.userType == "prime")
+            return false;
+
+        ArrayList<Buy> userBuys = getUserBuys(user.id);
 
         double lastMonthSpent = 0.0;
         LocalDateTime dateTimeNow = LocalDateTime.now();
 
         for (Buy buy : userBuys) {
-        if (dateTimeNow.getMonthValue() - 1 == buy.date.getMinute()) {
-        lastMonthSpent += buy.subTotal();
-        }
+            int timeNowMonthValue = dateTimeNow.getMonthValue();
+            if ((timeNowMonthValue == 1 ? 12 : timeNowMonthValue - 1) == buy.date.getMonthValue()) {
+                lastMonthSpent += buy.subTotal();
+            }
         }
 
         return lastMonthSpent > 100;
-        
+
     }
 }
