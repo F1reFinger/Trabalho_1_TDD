@@ -78,7 +78,7 @@ public class TestBuy {
     System.out.println(addressesMock.get(1).state);
 
     return Arrays.asList(new Object[][] {
-        { userSpecialMock, products1, "credit", companyCardMock, addressesMock.getFirst(), false, 286.7, 3.5, 54.0, 0.0, 300.0, 70.8 },
+        { userSpecialMock, products1, "credit", companyCardMock, addressesMock.get(0), false, 286.7, 3.5, 54.0, 0.0, 300.0, 70.8 },
         { userSpecialMock, products2, "credit", cardMock, addressesMock.get(1), false, 430.20000000000005, 12.6, 48.0, 16.0, 400.0, 46.400000000000006 },
         { userPrimeMock, products2, "money", cardMock, addressesMock.get(2), true, 452.0, 0.0, 48.0, 16.0, 400.0, 12.0 },
         { userPrimeMock, products2, "money", cardMock, addressesMock.get(3), false, 464.0, 0.0, 48.0, 16.0, 400.0, 0.0 },

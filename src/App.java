@@ -40,7 +40,7 @@ public class App {
                 System.out.println("Produto 1" + " " + product1.price);
                 System.out.println("Produto 2" + " " + product2.price);
 
-                Buy buy = new Buy(userStandard, products, "pix", userStandard.card, addresses.getFirst(), false);
+                Buy buy = new Buy(userStandard, products, "pix", userStandard.card, addresses.get(0), false);
                 userStandard.setCashbackBalance(buy);
                 store.addNewBuy(buy);
 
@@ -55,7 +55,7 @@ public class App {
                 System.out.println("Freight" + " " + buy.calculateFreight());
                 System.out.println("User is sepecial?" + " " + store.userIsSpecial(userStandard));
 
-                buy = new Buy(userPrime, products, "pix", userPrime.card, addresses.getFirst(), false);
+                buy = new Buy(userPrime, products, "pix", userPrime.card, addresses.get(0), false);
                 userPrime.setCashbackBalance(buy);
                 store.addNewBuy(buy);
                 if (store.userIsSpecial(userPrime)) {
@@ -68,7 +68,7 @@ public class App {
                 System.out.println("TaxICMS" + " " + buy.calculateTaxICMS());
                 System.out.println("Freight" + " " + buy.calculateFreight());
 
-                buy = new Buy(userSpecial, products, "pix", userSpecial.card, addresses.getFirst(), false);
+                buy = new Buy(userSpecial, products, "pix", userSpecial.card, addresses.get(0), false);
                 userSpecial.setCashbackBalance(buy);
                 store.addNewBuy(buy);
                 if (store.userIsSpecial(userSpecial)) {
