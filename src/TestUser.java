@@ -35,9 +35,9 @@ public class TestUser {
         User primeUser = new User("Prime User", "123456789", storeCard, addresses, "prime");
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
 
-        Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card);
-        Buy primeBuyPix = new Buy(primeUser, products, "pix", null);
-        Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card);
+        Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card, addresses.getFirst(), true);
+        Buy primeBuyPix = new Buy(primeUser, products, "pix", null, addresses.getFirst(), true);
+        Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card, addresses.getFirst(), false);
 
         Object[][] resposta = new Object[][] {
                 { new User("Prime User", "123456789", storeCard, addresses, "prime"), primeBuy, 5.0 },
