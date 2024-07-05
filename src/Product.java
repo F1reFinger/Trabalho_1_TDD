@@ -15,12 +15,10 @@ class Product {
         this.price = price;
     };
 
-    @Test
     double getICMSTax(Address adress) {
         return 0.0;
     }
 
-    @Test
     double getMunicipalTax(Address adress) {
         return 0.0;
     }
