@@ -1,5 +1,5 @@
 import static org.junit.Assert.assertEquals;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,30 +23,30 @@ public class TestStore {
 
     @Parameters
     public static Collection<Object[]> getParameters() {
-        ArrayList<Address> addresses = new ArrayList<Address>();
+        ArrayList<Address> addresses = new ArrayList<>();
         addresses.add(new Address("Anápolis", "GO"));
 
         Card storeCard = new Card("4296 1312 1212 1234");
         Card nonStoreCard = new Card("1234 5624 2354 1234");
 
-        ArrayList<Product> products = new ArrayList<Product>();
-        products.add(new Product("Celular", "UNI", 100.00));
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(new Product("Celular", "UNI", 150.00));
 
         User primeUser = new User("Prime User", "123456789", storeCard, addresses, "prime");
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
-        User specialUser = new User("Special User", "192837465", storeCard, addresses, "special");
 
-        Store store = new Store();
+        Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card);
+        Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card);
 
-        Buy buyLastMonth = new Buy(specialUser, products, "card", storeCard);
-        buyLastMonth.date = LocalDateTime.now().minusMonths(1);
+        Store storeWithPrimeUser = new Store();
+        storeWithPrimeUser.addNewBuy(primeBuy);
 
-        store.addNewBuy(buyLastMonth);
+        Store storeWithRegularUser = new Store();
+        storeWithRegularUser.addNewBuy(regularBuy);
 
         Object[][] resposta = new Object[][] {
-                { store, primeUser, false },
-                { store, specialUser, true },
-                { store, regularUser, false }
+                { storeWithPrimeUser, primeUser, false },
+                { storeWithRegularUser, regularUser, true }
         };
 
         return Arrays.asList(resposta);
