@@ -20,7 +20,7 @@ public class TestProductTax {
         this.address = address;
         this.expectedTax = expectedTax;
     }
-
+    
     @Parameters
     public static Collection<Object[]> getParameters() {
         // Define addresses and products for testing
@@ -32,10 +32,10 @@ public class TestProductTax {
 
         // Prepare test cases
         Object[][] testData = new Object[][] {
-            { product1, address1, product1.getICMSTax(address1) },  // Expected ICMS tax for product1 and address1
-            { product2, address1, product2.getICMSTax(address1) },  // Expected ICMS tax for product2 and address1
-            { product1, address2, product1.getICMSTax(address2) },  // Expected ICMS tax for product1 and address2
-            { product2, address2, product2.getICMSTax(address2) },  // Expected ICMS tax for product2 and address2
+            { product1, address1, product1.getICMSTax(address1) },
+            { product2, address1, product2.getICMSTax(address1) },
+            { product1, address2, product1.getICMSTax(address2) },
+            { product2, address2, product2.getICMSTax(address2) }
         };
 
         return Arrays.asList(testData);
