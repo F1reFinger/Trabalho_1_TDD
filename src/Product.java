@@ -32,7 +32,7 @@ class Product {
       if (!address.state.equals("DF")){
         return this.price * MUNICIPAL_TAX_RATE;
       }
-
+      
       return 0.0;
     }
 }

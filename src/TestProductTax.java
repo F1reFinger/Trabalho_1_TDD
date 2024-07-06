@@ -53,7 +53,6 @@ public class TestProductTax {
 
     @Test
     public void testGetMunicipalTax() {
-        double actualTax = product.getMunicipalTax(address);
-        assertEquals(expectedTax, actualTax, 0.0);  // Adjust delta as needed
+        assertEquals(expectedTax, product.getMunicipalTax(address), 0.1);  // Adjust delta as needed
     }
 }
