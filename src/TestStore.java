@@ -14,11 +14,13 @@ public class TestStore {
     Store store;
     User user;
     boolean expectedSpecialStatus;
+    int expectedUserBuysCount;
 
-    public TestStore(Store store, User user, boolean expectedSpecialStatus) {
+    public TestStore(Store store, User user, boolean expectedSpecialStatus, int expectedUserBuysCount) {
         this.store = store;
         this.user = user;
         this.expectedSpecialStatus = expectedSpecialStatus;
+        this.expectedUserBuysCount = expectedUserBuysCount;
     }
 
     @Parameters
@@ -45,8 +47,8 @@ public class TestStore {
         storeWithRegularUser.addNewBuy(regularBuy);
 
         Object[][] resposta = new Object[][] {
-                { storeWithPrimeUser, primeUser, false },
-                { storeWithRegularUser, regularUser, true }
+                { storeWithPrimeUser, primeUser, false, 1 },
+                { storeWithRegularUser, regularUser, true, 1 }
         };
 
         return Arrays.asList(resposta);
@@ -55,5 +57,10 @@ public class TestStore {
     @Test
     public void testUserIsSpecial() {
         assertEquals(expectedSpecialStatus, store.userIsSpecial(user));
+    }
+
+    @Test
+    public void testGetUserBuys() {
+        assertEquals(expectedUserBuysCount, store.getUserBuys(user.id).size());
     }
 }
