@@ -35,7 +35,11 @@ public class TestProductTax {
             { product1, address1, product1.getICMSTax(address1) },
             { product2, address1, product2.getICMSTax(address1) },
             { product1, address2, product1.getICMSTax(address2) },
-            { product2, address2, product2.getICMSTax(address2) }
+            { product2, address2, product2.getICMSTax(address2) },
+            { product1, address1, product1.getMunicipalTax(address1) },
+            { product2, address1, product2.getMunicipalTax(address1) },
+            { product1, address2, product1.getMunicipalTax(address2) },
+            { product2, address2, product2.getMunicipalTax(address2) }
         };
 
         return Arrays.asList(testData);
