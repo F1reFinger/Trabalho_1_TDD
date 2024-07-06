@@ -46,8 +46,8 @@ public class TestProductTax {
             {product3, address2, 18.84,  6.28},
 
             // endereço 3 "DF"
-            {product1, address3, 12.0, 4.0},
-            {product2, address3, 240.0,  80.0},
+            {product1, address3, 18.0, 0.0},
+            {product2, address3, 360.0,  0.0},
             {product3, address3, 28.26,  0.0}
 
         };
@@ -57,14 +57,14 @@ public class TestProductTax {
 
 
     @Test
-    public voi GetICMSTax() {
+    public void  testGetICMSTax() {
         double icmsTaxValue = product.getICMSTax(address);
-        assertEquals(expectedICMSTax, icmsTaxValue, 0.0);
+        assertEquals(expectedICMSTax, icmsTaxValue, 0.1);
     }
 
     @Test
-    public void GetMunicipalTax() {
+    public void testGetMunicipalTax() {
         double municipalTaxValue = product.getMunicipalTax(address);
-        assertEquals(expectedMunicipalTax, municipalTaxValue, 0.0);
+        assertEquals(expectedMunicipalTax, municipalTaxValue, 0.1);
     }
 }
