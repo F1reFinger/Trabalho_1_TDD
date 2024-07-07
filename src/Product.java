@@ -27,7 +27,6 @@ class Product {
       }
     }
 
-    @Test
     double getMunicipalTax(Address address) {
       if (!address.state.equals("DF")){
         return this.price * MUNICIPAL_TAX_RATE;

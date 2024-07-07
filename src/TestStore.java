@@ -37,8 +37,8 @@ public class TestStore {
         User primeUser = new User("Prime User", "123456789", storeCard, addresses, "prime");
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
 
-        Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card);
-        Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card);
+        Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card, addresses.get(0), true);
+        Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card, addresses.get(0), false);
 
         Store storeWithPrimeUser = new Store();
         storeWithPrimeUser.addNewBuy(primeBuy);
