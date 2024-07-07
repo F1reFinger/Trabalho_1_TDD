@@ -1,8 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
 class Store {
     ArrayList<Buy> buys;
 
@@ -18,7 +16,6 @@ class Store {
         return buys;
     }
 
-    @Test
     ArrayList<Buy> getUserBuys(String userId) {
         ArrayList<Buy> userBuys = new ArrayList<>();
 
@@ -31,7 +28,6 @@ class Store {
         return userBuys;
     }
 
-    @Test
     boolean userIsSpecial(User user) {
         if (user.userType == "prime")
             return false;

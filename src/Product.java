@@ -1,7 +1,5 @@
 import java.time.LocalTime;
 
-import org.junit.Test;
-
 class Product {
     public static final double DF_ICMS_TAX_RATE = 0.18;
     public static final double ICMS_TAX_RATE = 0.12;
@@ -27,7 +25,6 @@ class Product {
       }
     }
 
-    @Test
     double getMunicipalTax(Address address) {
       if (!address.state.equals("DF")){
         return this.price * MUNICIPAL_TAX_RATE;
