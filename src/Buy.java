@@ -1,113 +1,125 @@
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
-import org.junit.Test;
+import java.util.HashMap;
+import java.util.Map;
 
 class Buy {
-    String id;
-    LocalDateTime date;
-    User user;
-    ArrayList<Product> products;
-    // ENUM ("pix, money, credit")
-    String paymentType;
-    // if(paymentType == "credit") cardId SHOULD BE != NULL
-    Card card;
-    double freight;
-    // double totalDiscount;
-    // double taxICMS;
-    // double taxMunicipal;
+  String id;
+  LocalDateTime date;
+  User user;
+  ArrayList<Product> products;
+  String paymentType;
+  Address buyAddress;
+  Card card;
+  private boolean shouldUseCashback = false;
 
-    Buy(User user, ArrayList<Product> products, String paymentType, Card card) {
-        this.id = LocalTime.now().toString();
-        // forcing buy for last month
-        this.date = LocalDateTime.of(2024, 6, 1, 1, 1);
-        this.user = user;
-        this.products = products;
-        this.paymentType = paymentType;
-        this.card = card;
+  private static final Map<String, Map<Boolean, Double>> FREIGHT_VALUES;
+
+  static {
+    FREIGHT_VALUES = new HashMap<>();
+
+    Map<Boolean, Double> centroOesteMap = new HashMap<>();
+    centroOesteMap.put(true, 10.0);
+    centroOesteMap.put(false, 13.0);
+    FREIGHT_VALUES.put("Centro-Oeste", centroOesteMap);
+
+    Map<Boolean, Double> nordesteMap = new HashMap<>();
+    nordesteMap.put(true, 15.0);
+    nordesteMap.put(false, 18.0);
+    FREIGHT_VALUES.put("Nordeste", nordesteMap);
+
+    Map<Boolean, Double> norteMap = new HashMap<>();
+    norteMap.put(true, 20.0);
+    norteMap.put(false, 25.0);
+    FREIGHT_VALUES.put("Norte", norteMap);
+
+    Map<Boolean, Double> sudesteMap = new HashMap<>();
+    sudesteMap.put(true, 7.0);
+    sudesteMap.put(false, 10.0);
+    FREIGHT_VALUES.put("Sudeste", sudesteMap);
+
+    Map<Boolean, Double> sulMap = new HashMap<>();
+    sulMap.put(true, 10.0);
+    sulMap.put(false, 13.0);
+    FREIGHT_VALUES.put("Sul", sulMap);
+  }
+
+  Buy(User user, ArrayList<Product> products, String paymentType, Card card, Address buyAddress, boolean shouldUseCashback) {
+    this.id = LocalTime.now().toString();
+    this.user = user;
+    this.products = products;
+    this.paymentType = paymentType;
+    this.card = card;
+    this.buyAddress = buyAddress;
+    this.shouldUseCashback = user.userType == "prime" ? shouldUseCashback : false;
+  };
+
+  double total() {
+    return subTotal()
+        + calculateTaxMunicipal()
+        + calculateTaxICMS()
+        + calculateFreight()
+        - calculateTotalDiscount();
+  }
+
+  double subTotal() {
+    double total = 0.0;
+
+    for (Product product : products) {
+      total += product.price;
     }
 
-    @Test
-    double total() {
-        return subTotal()
-                + calculateTaxMunicipal()
-                + calculateTaxICMS()
-                + calculateFreight()
-                - calculateTotalDiscount();
+    return total;
+  }
+
+  double calculateTotalDiscount() {
+    if (user.userType == "special") {
+      double subTotalWithTaxes = subTotal() + calculateTaxMunicipal() + calculateTaxICMS();
+      if (card.isFromStoreCard()) return subTotalWithTaxes * 0.2;
+      return subTotalWithTaxes * 0.1;
+    } else if (user.userType == "prime" && shouldUseCashback) {
+      return user.getCashbackBalance();
+    }
+    return 0.0;
+  }
+
+  double calculateTaxMunicipal() {
+    double totalMunicipal = 0.0;
+
+    for (Product product : products) {
+      totalMunicipal += product.getMunicipalTax(buyAddress); 
     }
 
-    @Test
-    double subTotal() {
-        double total = 0.0;
+    return totalMunicipal;
+  }
 
-        for (Product product : products) {
-            total += product.price;
-        }
+  double calculateTaxICMS() {
+    double totalICMS = 0.0;
 
-        return total;
+    for (Product product : products) {
+      totalICMS += product.getICMSTax(buyAddress); 
     }
 
-    @Test
-    double calculateTotalDiscount() {
-        if (user.userType == "special") {
-            // Beneficios desconto de 10% (*0.9) no valor da compra
-            // Recebe mais 10% (*0.9) de desconto se utilizar o cartão da empresa
-            return 1.0;
-        } else if (user.userType == "prime") {
-            return 2.0;
-        } else if (user.userType == "standard") {
-            return 3.0;
-        }
-        return 0.0;
+    return totalICMS;
+  }
+
+  double calculateFreight() {
+    String region = this.buyAddress.getRegion();
+    Boolean isCapital = this.buyAddress.isCapital();
+
+    double freightValue;
+
+    if (this.buyAddress.state == "DF") freightValue = 5.0;
+    else freightValue = FREIGHT_VALUES.get(region).get(isCapital);
+
+    if (user.userType == "special") {
+      return freightValue * 0.7;
+    } else if (user.userType == "standard") {
+      return freightValue;
     }
 
-    @Test
-    double calculateTaxMunicipal() {
-        if (user.userType == "special") {
-            return 1.0;
-        } else if (user.userType == "prime") {
-            return 2.0;
-        } else if (user.userType == "standard") {
-            return 3.0;
-        }
-        return 0.0;
-    }
-
-    @Test
-    double calculateTaxICMS() {
-        // - Fora do DF 12% de ICMS e 4% de imposto municipal
-        // - Dentro do DF 18% de ICMS e 0% de imposto municipal
-        if (user.userType == "special") {
-            return 1.0;
-        } else if (user.userType == "prime") {
-            return 2.0;
-        } else if (user.userType == "standard") {
-            return 3.0;
-        }
-        return 0.0;
-
-    }
-
-    @Test
-    double calculateFreight() {
-        // --------------------------- Capital -- Interior
-        // ----- Distrito Federal ---- R$ 5,00 -- --------
-        // ----- Regiao Centro-oeste - R$ 10,00 - R$ 13,00
-        // ----- Regiao Nordeste ----- R$ 15,00 - R$ 18,00
-        // ----- Regiao Norte R$ ----- R$ 20,00 - R$ 25,00
-        // ----- Regiao Sudeste ------ R$ 7,00 -- R$ 10,00
-        // ----- Regiao Sul ---------- R$ 10,00 - R$ 13,00
-        if (user.userType == "special") {
-            // Possui 30% (*0.7) de desconto no valor do frete
-            return 1.0;
-        } else if (user.userType == "prime") {
-            // Frete grátis
-            return 2.0;
-        } else if (user.userType == "standard") {
-            return 3.0;
-        }
-        return 0.0;
-    }
+    return 0.0;
+  }
 
 }
