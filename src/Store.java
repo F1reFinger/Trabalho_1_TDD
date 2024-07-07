@@ -1,8 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.junit.Test;
-
 class Store {
     ArrayList<Buy> buys;
 
