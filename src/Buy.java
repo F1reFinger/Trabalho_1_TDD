@@ -76,18 +76,26 @@ class Buy {
   }
 
   double calculateSpecialDiscount() {
-    double subTotalWithTaxes = subTotal() + calculateTaxMunicipal() + calculateTaxICMS();
+    double subTotalWithTaxes = calculateSubTotalWithTaxes();
     if (card != null && card.isFromStoreCard()) {
       return subTotalWithTaxes * 0.2;
     }
     return subTotalWithTaxes * 0.1;
   }
 
+  double calculateSubTotalWithTaxes() {
+    return subTotal() + calculateTaxMunicipal() + calculateTaxICMS();
+  }
+
+  double calculatePrimeUserDiscount() {
+    return user.getCashbackBalance();
+  }
+
   double calculateTotalDiscount() {
     if (user.userType == "special") {
       return this.calculateSpecialDiscount();
     } else if (user.userType == "prime" && shouldUseCashback) {
-      return user.getCashbackBalance();
+      return this.calculatePrimeUserDiscount();
     } else {
       return 0.0;
     }
