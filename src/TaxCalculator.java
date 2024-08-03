@@ -1,4 +1,3 @@
-
 public class TaxCalculator {
     public static final double DF_ICMS_TAX_RATE = 0.18;
     public static final double ICMS_TAX_RATE = 0.12;
