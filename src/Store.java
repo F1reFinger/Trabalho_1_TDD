@@ -2,49 +2,35 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 class Store {
-    ArrayList<Buy> buys;
+    private ArrayList<Buy> buys;
 
-    Store() {
+    public Store() {
         this.buys = new ArrayList<>();
     }
 
-    void addNewBuy(Buy newBuy) {
+    public void addNewBuy(Buy newBuy) {
         this.buys.add(newBuy);
     }
 
-    ArrayList<Buy> getBuys() {
-        return buys;
+    public ArrayList<Buy> getBuys() {
+        return new ArrayList<>(buys); 
     }
 
-    ArrayList<Buy> getUserBuys(String userId) {
-        ArrayList<Buy> userBuys = new ArrayList<>();
-
-        for (Buy buy : buys) {
-            if (buy.user.id.equals(userId)) {
-                userBuys.add(buy);
-            }
-        }
-
-        return userBuys;
+    public ArrayList<Buy> getUserBuys(String userId) {
+        return UserUtils.getUserBuys(userId, buys);
     }
 
-    boolean userIsSpecial(User user) {
-        if (user.userType == "prime")
-            return false;
-
-        ArrayList<Buy> userBuys = getUserBuys(user.id);
-
-        double lastMonthSpent = 0.0;
-        LocalDateTime dateTimeNow = LocalDateTime.now();
-
-        for (Buy buy : userBuys) {
-            int timeNowMonthValue = dateTimeNow.getMonthValue();
-            if ((timeNowMonthValue == 1 ? 12 : timeNowMonthValue - 1) == buy.date.getMonthValue()) {
-                lastMonthSpent += buy.subTotal();
-            }
+    public boolean userIsSpecial(User user) {
+        if (isPrimeUser(user)) {
+            return true;
         }
+
+        double lastMonthSpent = UserUtils.calculateLastMonthSpent(user, buys);
 
         return lastMonthSpent > 100;
+    }
 
+    private boolean isPrimeUser(User user) {
+        return "prime".equals(user.getUserType());
     }
 }
