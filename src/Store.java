@@ -1,35 +1,50 @@
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-class Product {
-    public static final double DF_ICMS_TAX_RATE = 0.18;
-    public static final double ICMS_TAX_RATE = 0.12;
-    public static final double MUNICIPAL_TAX_RATE = 0.04;
+class Store {
+    ArrayList<Buy> buys;
 
-    String id;
-    String description;
-    String unitType;
-    double price;
-
-    Product(String descipriton, String unitType, double price) {
-        this.id = LocalTime.now().toString();
-        this.description = descipriton;
-        this.unitType = unitType;
-        this.price = price;
-    };
-
-    double getICMSTax(Address address) {
-      if (address.state.equals("DF")){
-        return this.price * DF_ICMS_TAX_RATE;
-      } else {
-        return this.price * ICMS_TAX_RATE;
-      }
+    Store() {
+        this.buys = new ArrayList<>();
     }
 
-    double getMunicipalTax(Address address) {
-      if (!address.state.equals("DF")){
-        return this.price * MUNICIPAL_TAX_RATE;
-      }
-      
-      return 0.0;
+    void addNewBuy(Buy newBuy) {
+        this.buys.add(newBuy);
+    }
+
+    ArrayList<Buy> getBuys() {
+        return buys;
+    }
+
+    ArrayList<Buy> getUserBuys(String userId) {
+        ArrayList<Buy> userBuys = new ArrayList<>();
+
+        for (Buy buy : buys) {
+            if (buy.user.id.equals(userId)) {
+                userBuys.add(buy);
+            }
+        }
+
+        return userBuys;
+    }
+
+    boolean userIsSpecial(User user) {
+        if (user.userType == "prime")
+            return false;
+
+        ArrayList<Buy> userBuys = getUserBuys(user.id);
+
+        double lastMonthSpent = 0.0;
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+
+        for (Buy buy : userBuys) {
+            int timeNowMonthValue = dateTimeNow.getMonthValue();
+            if ((timeNowMonthValue == 1 ? 12 : timeNowMonthValue - 1) == buy.date.getMonthValue()) {
+                lastMonthSpent += buy.subTotal();
+            }
+        }
+
+        return lastMonthSpent > 100;
+
     }
 }

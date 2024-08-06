@@ -15,20 +15,6 @@ class Product {
         this.price = price;
     };
 
-    /*double getICMSTax(Address address) {
-      if (address.state.equals("DF")){
-        return this.price * DF_ICMS_TAX_RATE;
-      } else {
-        return this.price * ICMS_TAX_RATE;
-      }
-    }
-
-    double getMunicipalTax(Address address) {
-      if (!address.state.equals("DF")){
-        return this.price * MUNICIPAL_TAX_RATE;
-      }
-      return 0.0;
-    }*/
     double getICMSTax(Address address){
         return calc.calculateICMSTax(this.price, address.state);
     }
