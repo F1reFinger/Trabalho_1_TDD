@@ -1,36 +1,35 @@
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalTime;
 
-class Store {
-    private ArrayList<Buy> buys;
+class Product {
+    public static final double DF_ICMS_TAX_RATE = 0.18;
+    public static final double ICMS_TAX_RATE = 0.12;
+    public static final double MUNICIPAL_TAX_RATE = 0.04;
 
-    public Store() {
-        this.buys = new ArrayList<>();
+    String id;
+    String description;
+    String unitType;
+    double price;
+
+    Product(String descipriton, String unitType, double price) {
+        this.id = LocalTime.now().toString();
+        this.description = descipriton;
+        this.unitType = unitType;
+        this.price = price;
+    };
+
+    double getICMSTax(Address address) {
+      if (address.state.equals("DF")){
+        return this.price * DF_ICMS_TAX_RATE;
+      } else {
+        return this.price * ICMS_TAX_RATE;
+      }
     }
 
-    public void addNewBuy(Buy newBuy) {
-        this.buys.add(newBuy);
-    }
-
-    public ArrayList<Buy> getBuys() {
-        return new ArrayList<>(buys); 
-    }
-
-    public ArrayList<Buy> getUserBuys(String userId) {
-        return UserUtils.getUserBuys(userId, buys);
-    }
-
-    public boolean userIsSpecial(User user) {
-        if (isPrimeUser(user)) {
-            return true;
-        }
-
-        double lastMonthSpent = UserUtils.calculateLastMonthSpent(user, buys);
-
-        return lastMonthSpent > 100;
-    }
-
-    private boolean isPrimeUser(User user) {
-        return "prime".equals(user.getUserType());
+    double getMunicipalTax(Address address) {
+      if (!address.state.equals("DF")){
+        return this.price * MUNICIPAL_TAX_RATE;
+      }
+      
+      return 0.0;
     }
 }
