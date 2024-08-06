@@ -1,25 +1,49 @@
 import java.time.LocalTime;
+class Product {
 
-public class Product {
+    TaxCalculator calc = new TaxCalculator();
+
     String id;
     String description;
     String unitType;
     double price;
-    TaxCalculator taxCalculator;
 
-    public Product(String description, String unitType, double price) {
+    Product(String descipriton, String unitType, double price) {
         this.id = LocalTime.now().toString();
-        this.description = description;
+        this.description = descipriton;
         this.unitType = unitType;
         this.price = price;
-        this.taxCalculator = new TaxCalculator();
+    };
+
+    /*double getICMSTax(Address address) {
+      if (address.state.equals("DF")){
+        return this.price * DF_ICMS_TAX_RATE;
+      } else {
+        return this.price * ICMS_TAX_RATE;
+      }
     }
 
-    public double getICMSTax(Address address) {
-        return taxCalculator.calculateICMSTax(this.price, address.getRegion());
+    double getMunicipalTax(Address address) {
+      if (!address.state.equals("DF")){
+        return this.price * MUNICIPAL_TAX_RATE;
+      }
+      return 0.0;
+    }*/
+    double getICMSTax(Address address){
+        /*if(address.state.equals("DF")){
+            return this.price * TaxCalculator.DF_ICMS_TAX_RATE;
+        }
+        return this.price * TaxCalculator.DF_ICMS_TAX_RATE;*/
+        return calc.calculateICMSTax(this.price, address.getRegion());
     }
 
-    public double getMunicipalTax(Address address) {
-        return taxCalculator.calculateMunicipalTax(this.price, address.getRegion());
-    }
+    double getMunicipalTax(Address address) {
+        /*if (!address.state.equals("DF")){
+          return this.price * TaxCalculator.DF_ICMS_TAX_RATE;
+        }
+        
+        return 0.0;*/
+        return calc.calculateMunicipalTax(this.price, address.getRegion());
+      }
+
 }
