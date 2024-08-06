@@ -30,20 +30,11 @@ class Product {
       return 0.0;
     }*/
     double getICMSTax(Address address){
-        /*if(address.state.equals("DF")){
-            return this.price * TaxCalculator.DF_ICMS_TAX_RATE;
-        }
-        return this.price * TaxCalculator.DF_ICMS_TAX_RATE;*/
-        return calc.calculateICMSTax(this.price, address.getRegion());
+        return calc.calculateICMSTax(this.price, address.state);
     }
 
     double getMunicipalTax(Address address) {
-        /*if (!address.state.equals("DF")){
-          return this.price * TaxCalculator.DF_ICMS_TAX_RATE;
-        }
-        
-        return 0.0;*/
-        return calc.calculateMunicipalTax(this.price, address.getRegion());
+        return calc.calculateMunicipalTax(this.price, address.state);
       }
 
 }
