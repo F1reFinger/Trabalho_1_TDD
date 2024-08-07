@@ -49,7 +49,7 @@ class Buy {
     this.id = LocalTime.now().toString();
     this.user = user;
     this.products = products;
-    this.date = LocalDateTime.of(2024, 6, 1, 1, 1);
+    this.date = LocalDateTime.now();
     this.paymentType = paymentType;
     this.card = card;
     this.buyAddress = buyAddress;
