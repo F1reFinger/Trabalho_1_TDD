@@ -3,9 +3,11 @@ import java.util.ArrayList;
 
 class Store {
     ArrayList<Buy> buys;
+    LocalDateTime datetime;
 
     Store() {
         this.buys = new ArrayList<>();
+        this.datetime = LocalDateTime.now();
     }
 
     void addNewBuy(Buy newBuy) {
@@ -35,10 +37,9 @@ class Store {
         ArrayList<Buy> userBuys = getUserBuys(user.id);
 
         double lastMonthSpent = 0.0;
-        LocalDateTime dateTimeNow = LocalDateTime.now();
 
         for (Buy buy : userBuys) {
-            int timeNowMonthValue = dateTimeNow.getMonthValue();
+            int timeNowMonthValue = this.datetime.getMonthValue();
             if ((timeNowMonthValue == 1 ? 12 : timeNowMonthValue - 1) == buy.date.getMonthValue()) {
                 lastMonthSpent += buy.subTotal();
             }
