@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,17 +39,26 @@ public class TestStore {
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
 
         Buy primeBuy = new Buy(primeUser, products, "card", primeUser.card, addresses.get(0), true);
+
         Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card, addresses.get(0), false);
+        regularBuy.date = LocalDateTime.of(2024, 6, 1, 1, 1);
+        
+        Buy regularBuyTwo = new Buy(regularUser, products, "card", regularUser.card, addresses.get(0), false);
 
         Store storeWithPrimeUser = new Store();
         storeWithPrimeUser.addNewBuy(primeBuy);
 
         Store storeWithRegularUser = new Store();
+        storeWithRegularUser.datetime = LocalDateTime.of(2024, 7, 1, 1, 1);
         storeWithRegularUser.addNewBuy(regularBuy);
+
+        Store storeWithRegularUserTwo = new Store();
+        storeWithRegularUserTwo.addNewBuy(regularBuyTwo);
 
         Object[][] resposta = new Object[][] {
                 { storeWithPrimeUser, primeUser, false, 1 },
-                { storeWithRegularUser, regularUser, true, 1 }
+                { storeWithRegularUser, regularUser, true, 1 },
+                { storeWithRegularUserTwo, regularUser, false, 1 }
         };
 
         return Arrays.asList(resposta);
