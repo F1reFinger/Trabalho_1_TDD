@@ -1,9 +1,7 @@
 import java.time.LocalTime;
-
 class Product {
-    public static final double DF_ICMS_TAX_RATE = 0.18;
-    public static final double ICMS_TAX_RATE = 0.12;
-    public static final double MUNICIPAL_TAX_RATE = 0.04;
+
+    TaxCalculator calc = new TaxCalculator();
 
     String id;
     String description;
@@ -17,19 +15,12 @@ class Product {
         this.price = price;
     };
 
-    double getICMSTax(Address address) {
-      if (address.state.equals("DF")){
-        return this.price * DF_ICMS_TAX_RATE;
-      } else {
-        return this.price * ICMS_TAX_RATE;
-      }
+    double getICMSTax(Address address){
+        return calc.calculateICMSTax(this.price, address.state);
     }
 
     double getMunicipalTax(Address address) {
-      if (!address.state.equals("DF")){
-        return this.price * MUNICIPAL_TAX_RATE;
+        return calc.calculateMunicipalTax(this.price, address.state);
       }
-      
-      return 0.0;
-    }
+
 }
