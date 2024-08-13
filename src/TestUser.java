@@ -30,7 +30,9 @@ public class TestUser {
         Card nonStoreCard = new Card("1234 5624 2354 1234");
 
         ArrayList<Product> products = new ArrayList<Product>();
-        products.add(new Product("Celular", "UNI", 100.00));
+        TaxCalculator calc = new TaxCalculator();
+
+        products.add(new Product("Celular", "UNI", 100.00, calc));
 
         User primeUser = new User("Prime User", "123456789", storeCard, addresses, "prime");
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
