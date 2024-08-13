@@ -12,7 +12,8 @@ class Buy {
   Card card;
   private boolean shouldUseCashback = false;
 
-  Buy(User user, ArrayList<Product> products, String paymentType, Card card, Address buyAddress, boolean shouldUseCashback) {
+  Buy(User user, ArrayList<Product> products, String paymentType, Card card, Address buyAddress,
+      boolean shouldUseCashback) {
     this.id = LocalTime.now().toString();
     this.user = user;
     this.products = products;
@@ -41,22 +42,37 @@ class Buy {
     return total;
   }
 
+  double calculateSpecialDiscount() {
+    double subTotalWithTaxes = calculateSubTotalWithTaxes();
+    if (card != null && card.isFromStoreCard()) {
+      return subTotalWithTaxes * 0.2;
+    }
+    return subTotalWithTaxes * 0.1;
+  }
+
+  double calculateSubTotalWithTaxes() {
+    return subTotal() + calculateTaxMunicipal() + calculateTaxICMS();
+  }
+
+  double calculatePrimeUserDiscount() {
+    return user.getCashbackBalance();
+  }
+
   double calculateTotalDiscount() {
     if (user.userType == "special") {
-      double subTotalWithTaxes = subTotal() + calculateTaxMunicipal() + calculateTaxICMS();
-      if (card.isFromStoreCard()) return subTotalWithTaxes * 0.2;
-      return subTotalWithTaxes * 0.1;
+      return this.calculateSpecialDiscount();
     } else if (user.userType == "prime" && shouldUseCashback) {
-      return user.getCashbackBalance();
+      return this.calculatePrimeUserDiscount();
+    } else {
+      return 0.0;
     }
-    return 0.0;
   }
 
   double calculateTaxMunicipal() {
     double totalMunicipal = 0.0;
 
     for (Product product : products) {
-      totalMunicipal += product.getMunicipalTax(buyAddress); 
+      totalMunicipal += product.getMunicipalTax(buyAddress);
     }
 
     return totalMunicipal;
@@ -66,7 +82,7 @@ class Buy {
     double totalICMS = 0.0;
 
     for (Product product : products) {
-      totalICMS += product.getICMSTax(buyAddress); 
+      totalICMS += product.getICMSTax(buyAddress);
     }
 
     return totalICMS;
