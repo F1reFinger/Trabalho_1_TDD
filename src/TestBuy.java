@@ -22,7 +22,8 @@ public class TestBuy {
   private double expectedTotalDiscount;
   private boolean shouldUseCashback;
 
-  public TestBuy(User user, ArrayList<Product> products, String paymentType, Card card, Address buyAddress, boolean shouldUseCashback, double expectedTotal, double expectedFreight, 
+  public TestBuy(User user, ArrayList<Product> products, String paymentType, Card card, Address buyAddress,
+      boolean shouldUseCashback, double expectedTotal, double expectedFreight,
       double expectedICMS, double expectedMunicipal, double expectedSubtotal, double expectedTotalDiscount) {
     this.user = user;
     this.products = products;
@@ -41,19 +42,17 @@ public class TestBuy {
 
   @Parameters
   public static Collection<Object[]> data() {
+    TaxCalculator calc = new TaxCalculator();
+
     ArrayList<Product> products1 = new ArrayList<>(
-      Arrays.asList(
-        new Product("some description 1", "unit type", 100.00),
-        new Product("some description 2", "unit type", 200.00)
-      )
-    );
+        Arrays.asList(
+            new Product("some description 1", "unit type", 100.00, calc),
+            new Product("some description 2", "unit type", 200.00, calc)));
 
     ArrayList<Product> products2 = new ArrayList<>(
-      Arrays.asList(
-        new Product("some description 3", "unit type", 150.0),
-        new Product("some description 4", "unit type", 250.0)
-      )
-    );
+        Arrays.asList(
+            new Product("some description 3", "unit type", 150.0, calc),
+            new Product("some description 4", "unit type", 250.0, calc)));
 
     Card cardMock = new Card("1234 5678 9101 1121");
     Card companyCardMock = new Card("4296 1300 1234 1234");
@@ -64,25 +63,28 @@ public class TestBuy {
             new Address("Arcoverde", "PE"),
             new Address("São Paulo", "SP"),
             new Address("Porto Alegre", "RS"),
-            new Address("Ananás", "TO")
-        )
-    );
+            new Address("Ananás", "TO")));
 
     Special userSpecialMock = new Special("special user", "999999999", cardMock, addressesMock, "special");
     Prime userPrimeMock = new Prime("prime user", "999999999", cardMock, addressesMock, "prime");
     Standard userStandardMock = new Standard("standard user", "999999999", cardMock, addressesMock, "standard");
-    
+
     Buy cashbackBuyMock = new Buy(userPrimeMock, products2, "money", cardMock, addressesMock.get(2), false);
     userPrimeMock.setCashbackBalance(cashbackBuyMock);
 
     System.out.println(addressesMock.get(1).state);
 
     return Arrays.asList(new Object[][] {
-        { userSpecialMock, products1, "credit", companyCardMock, addressesMock.get(0), false, 286.7, 3.5, 54.0, 0.0, 300.0, 70.8 },
-        { userSpecialMock, products2, "credit", cardMock, addressesMock.get(1), false, 430.20000000000005, 12.6, 48.0, 16.0, 400.0, 46.400000000000006 },
-        { userPrimeMock, products2, "money", cardMock, addressesMock.get(2), true, 452.0, 0.0, 48.0, 16.0, 400.0, 12.0 },
-        { userPrimeMock, products2, "money", cardMock, addressesMock.get(3), false, 464.0, 0.0, 48.0, 16.0, 400.0, 0.0 },
-        { userStandardMock, products1, "pix", cardMock, addressesMock.get(4), false, 373.0, 25.0, 36.0, 12.0, 300.0, 0.0 }
+        { userSpecialMock, products1, "credit", companyCardMock, addressesMock.get(0), false, 286.7, 3.5, 54.0, 0.0,
+            300.0, 70.8 },
+        { userSpecialMock, products2, "credit", cardMock, addressesMock.get(1), false, 430.20000000000005, 12.6, 48.0,
+            16.0, 400.0, 46.400000000000006 },
+        { userPrimeMock, products2, "money", cardMock, addressesMock.get(2), true, 452.0, 0.0, 48.0, 16.0, 400.0,
+            12.0 },
+        { userPrimeMock, products2, "money", cardMock, addressesMock.get(3), false, 464.0, 0.0, 48.0, 16.0, 400.0,
+            0.0 },
+        { userStandardMock, products1, "pix", cardMock, addressesMock.get(4), false, 373.0, 25.0, 36.0, 12.0, 300.0,
+            0.0 }
     });
   }
 
@@ -111,13 +113,13 @@ public class TestBuy {
   }
 
   @Test
-  public void testBuySubTotal(){
+  public void testBuySubTotal() {
     Buy buy = new Buy(user, products, paymentType, card, buyAddress, shouldUseCashback);
     assertEquals(expectedSubtotal, buy.subTotal(), 0.00);
   }
 
   @Test
-  public void testCalculateTotalDiscount(){
+  public void testCalculateTotalDiscount() {
     Buy buy = new Buy(user, products, paymentType, card, buyAddress, shouldUseCashback);
     assertEquals(expectedTotalDiscount, buy.calculateTotalDiscount(), 0.00);
   }

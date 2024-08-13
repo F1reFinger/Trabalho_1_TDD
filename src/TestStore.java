@@ -31,9 +31,10 @@ public class TestStore {
 
         Card storeCard = new Card("4296 1312 1212 1234");
         Card nonStoreCard = new Card("1234 5624 2354 1234");
+        TaxCalculator calc = new TaxCalculator();
 
         ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product("Celular", "UNI", 150.00));
+        products.add(new Product("Celular", "UNI", 150.00, calc));
 
         User primeUser = new User("Prime User", "123456789", storeCard, addresses, "prime");
         User regularUser = new User("Regular User", "987654321", nonStoreCard, addresses, "regular");
@@ -42,7 +43,7 @@ public class TestStore {
 
         Buy regularBuy = new Buy(regularUser, products, "card", regularUser.card, addresses.get(0), false);
         regularBuy.date = LocalDateTime.of(2024, 6, 1, 1, 1);
-        
+
         Buy regularBuyTwo = new Buy(regularUser, products, "card", regularUser.card, addresses.get(0), false);
 
         Store storeWithPrimeUser = new Store();

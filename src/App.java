@@ -29,8 +29,10 @@ public class App {
                                 addresses,
                                 "standard");
 
-                Product product1 = new Product("Maçã", "KG", 0.89);
-                Product product2 = new Product("Celular", "UNI", 2000.00);
+                TaxCalculator calc = new TaxCalculator();
+
+                Product product1 = new Product("Maçã", "KG", 0.89, calc);
+                Product product2 = new Product("Celular", "UNI", 2000.00, calc);
 
                 final ArrayList<Product> products = new ArrayList<Product>();
 
