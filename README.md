@@ -13,4 +13,6 @@ trabalho para a materia de TPPE
 
 O sistema foi criado utilizando a ferramenta JUnit4, com o propósito de aplicar a técnica de desenvolvimento de software TDD (Test Driven Development) e a técnica de parametrização de testes. A aplicação simula um sistema de vendas, permitindo o gerenciamento de clientes, produtos e a realização de vendas, além de calcular valores como descontos, impostos e frete.
 
+## Diagrama de classes
 
+![Diagrama](./imagens/Classe_UML_-_ClasseUML.jpeg)
