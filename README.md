@@ -15,4 +15,4 @@ O sistema foi criado utilizando a ferramenta JUnit4, com o propósito de aplicar
 
 ## Diagrama de classes
 
-![Diagrama](./imagens/Classe_UML_-_ClasseUML.jpeg)
+![Diagrama](./imagens/classe.jpeg)
