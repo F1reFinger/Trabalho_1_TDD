@@ -3,10 +3,10 @@ trabalho para a materia de TPPE
 
 ## :handshake: Colaboradores
 
-| <img src="https://avatars.githubusercontent.com/u/78980856?s=400&u=921d277b9f43db9a1f09325391b30bb23e2f6c1e&v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/98053876?v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/78981008?v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/54339291?v=4" width="100px" style="border-radius: 50%;"> |
+| <img src="https://avatars.githubusercontent.com/u/63085711?v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/88190414?v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/78981008?v=4" width="100px" style="border-radius: 50%;"> | <img src="https://avatars.githubusercontent.com/u/78388335?v=4" width="100px" style="border-radius: 50%;"> |
 |:----------------------------------------------------------:|:------------------------------------------------:|:-------------------------------------------------------------:|:----------------------------------------------------:|
 |[Paulo Henrique](https://github.com/PhRezende-eng)      | [Guilherme Barbosa](https://github.com/guibrbs)     | [Silas Neres](https://github.com/Silas-neres)      | [Helder lourenco](https://github.com/TaynaraCris)      |
-|200019520     | 202017521   | 200043536     | 211031833      |
+|190094257    | 200037994   | 200043536     | 180121847      |
 
 
 ## Descrição do Projeto 
