@@ -16,3 +16,9 @@ O sistema foi criado utilizando a ferramenta JUnit4, com o propósito de aplicar
 ## Diagrama de classes
 
 ![Diagrama](./imagens/classe.jpeg)
+
+## Ferramentas Utilizadas
+
+- JUnit4: Ferramenta de testes unitários para Java, utilizada para escrever e executar os testes.
+- VScode: utilizado para o desenvolvimento do projeto.
+- Git/GitHub: Controle de versão e hospedagem do código-fonte.
