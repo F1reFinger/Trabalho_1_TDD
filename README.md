@@ -15,4 +15,13 @@ O sistema foi criado utilizando a ferramenta JUnit4, com o propósito de aplicar
 
 ## Diagrama de classes
 
-![Diagrama](./imagens/classe.jpeg)
+![Diagrama](./arquivos/classe.jpeg)
+
+## Implementação
+A implementação utilizando TDD proporcionou um desenvolvimento robusto e confiável, garantindo que todas as funcionalidades fossem validadas desde o início. Isso não apenas melhorou a qualidade do código, mas também facilitou a identificação e correção de erros durante o desenvolvimento. A aplicação de TDD assegurou que cada componente do sistema fosse devidamente testado, resultando em um software mais estável e fácil de manter.
+
+## Ferramentas Utilizadas
+
+- JUnit4: Ferramenta de testes unitários para Java, utilizada para escrever e executar os testes.
+- VScode: utilizado para o desenvolvimento do projeto.
+- Git/GitHub: Controle de versão e hospedagem do código-fonte.
