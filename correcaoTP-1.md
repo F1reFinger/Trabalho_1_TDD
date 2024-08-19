@@ -12,7 +12,7 @@ Critérios:
 | Critério 1 | 40       | CadastroCliente, CadastroProduto, Vendas do ultimo mes|
 | Critério 2 | 100      |                                                      |
 | Critério 3 | 40       | CadastroCliente, CadastroProduto, Vendas do ultimo mes|
-| Critério 4 | 30       | TestStore                                            |
+| Critério 4 | 40       | TestStore                                            |
 
 Obs: corrigido o TP referente ao commit ff299607af9130a38f1c7621613bfe2011fd9f4e
 
